@@ -38,6 +38,7 @@ public class ItemsFragment extends Fragment implements LoaderManager.LoaderCallb
     RecyclerView mRecyclerView;
     private ItemsDataHelper mDataHelper;
     private ItemsAdapter mAdapter;
+    private  Cursor mCursor;
 
     public static ItemsFragment newInstance() {
         return new ItemsFragment();
@@ -49,14 +50,6 @@ public class ItemsFragment extends Fragment implements LoaderManager.LoaderCallb
         mDataHelper = new ItemsDataHelper(getActivity());
     }
 
-    private void loadItems() {
-        String[] items = getActivity().getResources().getStringArray(R.array.items);
-        ArrayList<DemoItem> demoItems = new ArrayList<>();
-        for (int i = 0; i < items.length; i++) {
-            demoItems.add(new DemoItem(i, items[i]));
-        }
-        mDataHelper.bulkInsert(demoItems);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +62,7 @@ public class ItemsFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mAdapter = new ItemsAdapter(getActivity());
         mAdapter = new ItemsAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -91,6 +85,15 @@ public class ItemsFragment extends Fragment implements LoaderManager.LoaderCallb
         } else {
             mAdapter.changeCursor(cursor);
         }
+    }
+
+    private void loadItems() {
+        String[] items = getActivity().getResources().getStringArray(R.array.items);
+        ArrayList<DemoItem> demoItems = new ArrayList<>();
+        for (int i = 0; i < items.length; i++) {
+            demoItems.add(new DemoItem(i, items[i]));
+        }
+        mDataHelper.bulkInsert(demoItems);
     }
 
     @Override

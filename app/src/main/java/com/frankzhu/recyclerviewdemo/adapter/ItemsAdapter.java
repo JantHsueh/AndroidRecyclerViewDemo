@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.frankzhu.recyclerviewdemo.R;
 import com.frankzhu.recyclerviewdemo.bean.DemoItem;
 import com.frankzhu.recyclerviewdemo.ui.DetailActivity;
-import com.frankzhu.recyclerviewdemo.ui.SelectActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,6 +36,13 @@ public class ItemsAdapter extends BaseAbstractRecycleCursorAdapter<RecyclerView.
         super(context, null);
         mLayoutInflater = LayoutInflater.from(context);
     }
+
+    //这个暂时没有用到，cursor的传递使用父类的changeCursor方法
+    public ItemsAdapter(Context context, Cursor cursor) {
+        super(context, cursor);
+        mLayoutInflater = LayoutInflater.from(context);
+    }
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, Cursor cursor) {
@@ -64,17 +70,13 @@ public class ItemsAdapter extends BaseAbstractRecycleCursorAdapter<RecyclerView.
         void onItemClick() {
             Log.d("NormalTextViewHolder", "onClick--> position = " + getPosition());
             DemoItem item = DemoItem.fromCursor((Cursor) mAdapter.getItem(getPosition()));
-            if (getPosition() < 11) {
-                Intent intent = new Intent(mAdapter.mContext, DetailActivity.class);
-                intent.putExtra("position", getPosition());
-                intent.putExtra("title", item.title);
-                mAdapter.mContext.startActivity(intent);
-            } else {
-                Intent intent = new Intent(mAdapter.mContext, SelectActivity.class);
-                intent.putExtra("position", getPosition());
-                intent.putExtra("title", item.title);
-                mAdapter.mContext.startActivity(intent);
-            }
+
+            Intent intent = new Intent(mAdapter.mContext, DetailActivity.class);
+            intent.putExtra("position", getPosition());
+            intent.putExtra("title", item.title);
+            mAdapter.mContext.startActivity(intent);
+
+
         }
     }
 }

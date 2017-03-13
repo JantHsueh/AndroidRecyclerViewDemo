@@ -9,7 +9,10 @@ import com.frankzhu.recyclerviewdemo.fragment.AnimFragment;
 import com.frankzhu.recyclerviewdemo.fragment.FullyExpandedFragment;
 import com.frankzhu.recyclerviewdemo.fragment.MultipleFragment;
 import com.frankzhu.recyclerviewdemo.fragment.MultipleHeaderBottomFragment;
+import com.frankzhu.recyclerviewdemo.fragment.MultipleSelectFragment;
 import com.frankzhu.recyclerviewdemo.fragment.NormalFragment;
+import com.frankzhu.recyclerviewdemo.fragment.SingleSelectFragment;
+import com.frankzhu.recyclerviewdemo.fragment.WaterfallStaggeredGridFragment;
 
 import butterknife.ButterKnife;
 
@@ -35,27 +38,44 @@ public class DetailActivity extends AppCompatActivity {
         } else if (index == 2) {
             updateNormalFragment(NormalFragment.TYPE_STAGGERED_GRID_LAYOUT);
         } else if (index == 3) {
-            updateMultipleFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
+            updateWaterfallFragment();
         } else if (index == 4) {
-            updateMultipleFragment(MultipleFragment.TYPE_GRID_LAYOUT);
+            updateMultipleFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
         } else if (index == 5) {
-            updateMultipleHeaderFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
+            updateMultipleFragment(MultipleFragment.TYPE_GRID_LAYOUT);
         } else if (index == 6) {
-            updateMultipleHeaderFragment(MultipleFragment.TYPE_GRID_LAYOUT);
+            updateMultipleHeaderFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
         } else if (index == 7) {
-            updateAnimFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
+            updateMultipleHeaderFragment(MultipleFragment.TYPE_GRID_LAYOUT);
         } else if (index == 8) {
-            updateAnimFragment(MultipleFragment.TYPE_GRID_LAYOUT);
+            updateAnimFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
         } else if (index == 9) {
-            updateFullyExpandedFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
+            updateAnimFragment(MultipleFragment.TYPE_GRID_LAYOUT);
         } else if (index == 10) {
+            updateFullyExpandedFragment(MultipleFragment.TYPE_LINEAR_LAYOUT);
+        } else if (index == 11) {
             updateFullyExpandedFragment(MultipleFragment.TYPE_GRID_LAYOUT);
+        } else if (index == 12) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, SingleSelectFragment.newInstance())
+                    .commit();
+        } else if (index == 13) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, MultipleSelectFragment.newInstance())
+                    .commit();
         }
+
     }
 
     public void updateNormalFragment(int type) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, NormalFragment.newInstance(type))
+                .commit();
+    }
+
+    public void updateWaterfallFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new WaterfallStaggeredGridFragment())
                 .commit();
     }
 

@@ -34,6 +34,7 @@ public class NormalFragment extends Fragment {
     public static final int TYPE_LINEAR_LAYOUT = 1;
     public static final int TYPE_GRID_LAYOUT = 2;
     public static final int TYPE_STAGGERED_GRID_LAYOUT = 3;
+    public static final int TYPE_WATERFALL_STAGGERED_GRID_LAYOUT = 4;
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
